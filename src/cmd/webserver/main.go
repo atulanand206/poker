@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/atulanand206/poker/cmd"
+	"github.com/atulanand206/poker/src"
 	"net/http"
 	"os"
 )
