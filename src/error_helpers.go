@@ -2,7 +2,6 @@ package poker
 
 import (
 	"fmt"
-	"log"
 )
 
 func ErrorParseLeague(err error) error {
@@ -12,20 +11,23 @@ func ErrorParseLeague(err error) error {
 	return err
 }
 
-func ErrorFileOpening(err error, fileName string) {
+func ErrorFileOpening(err error, fileName string) error {
 	if err != nil {
-		log.Fatalf("problem opening %s %v", fileName, err)
+		err = fmt.Errorf("problem opening %s %v", fileName, err)
 	}
+	return err
 }
 
-func ErrorFileCreation(err error) {
+func ErrorFileCreation(err error) error {
 	if err != nil {
-		log.Fatalf("problem creating file system player store, %v ", err)
+		fmt.Errorf("problem creating file system player store, %v ", err)
 	}
+	return err
 }
 
-func ErrorListenAndServe(err error) {
+func ErrorListenAndServe(err error) error {
 	if err != nil {
-		log.Fatalf("could not listen on port 5000 %v", err)
+		fmt.Errorf("could not listen on port 5000 %v", err)
 	}
+	return err
 }

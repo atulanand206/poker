@@ -77,6 +77,19 @@ func TestFileSystemStore(t *testing.T) {
 		_, err := NewFileSystemPlayerStore(database)
 		AssertNoError(t, err)
 	})
+
+	t.Run("works with actual file", func(t *testing.T) {
+		store, closeFunc, err := FileSystemPlayerStoreFromFile("db.game.json")
+		defer closeFunc()
+		AssertNoError(t, err)
+
+		score := store.getPlayerScore("Jack")
+		store.RecordWin("Jack")
+		got := store.getPlayerScore("Jack")
+
+		want := score + 1
+		AssertEqualIntegers(t, got, want)
+	})
 }
 
 func createTempFile(t *testing.T, seedData string) (*os.File, func()) {

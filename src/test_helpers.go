@@ -67,6 +67,12 @@ func contains(store []string, player string) bool {
 	return false
 }
 
+func AssertPlayerWin(t *testing.T, store *StubPlayerStore, winner string) {
+	t.Helper()
+	AssertEqualIntegers(t, len(store.winCalls), 1)
+	AssertEqual(t, store.winCalls[0], winner)
+}
+
 func AssertDeepEqual(t *testing.T, a interface{}, b interface{}) {
 	t.Helper()
 	if !reflect.DeepEqual(a, b) {

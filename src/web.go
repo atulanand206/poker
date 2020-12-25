@@ -72,3 +72,22 @@ func (server *PlayerServer) showScore(writer http.ResponseWriter, player string)
 func playerNameFromRequest(request http.Request) string {
 	return request.URL.Path[len("/players/"):]
 }
+
+type StubPlayerStore struct {
+	scores   map[string]int
+	winCalls []string
+	league   League
+}
+
+func (s *StubPlayerStore) getPlayerScore(player string) int {
+	score := s.scores[player]
+	return score
+}
+
+func (s *StubPlayerStore) RecordWin(player string) {
+	s.winCalls = append(s.winCalls, player)
+}
+
+func (s *StubPlayerStore) GetLeague() League {
+	return s.league
+}

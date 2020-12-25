@@ -1,8 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"github.com/atulanand206/poker/src"
-	"net/http"
+	"os"
 	"log"
 )
 
@@ -15,8 +16,7 @@ func main() {
 	}
 	defer closeStore()
 
-	server := poker.NewPlayerServer(store)
-	handler := http.HandlerFunc(server.ServeHTTP)
-	err = http.ListenAndServe(":5000", handler)
-	err = poker.ErrorListenAndServe(err)
+	fmt.Println("Let's play poker")
+	fmt.Println("Type {Name} wins to record a win.")
+	poker.NewCli(store, os.Stdin).PlayPoker()
 }

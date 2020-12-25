@@ -12,6 +12,23 @@ type FileSystemPlayerStore struct {
 	league   League
 }
 
+func FileSystemPlayerStoreFromFile(dbFileName string) (*FileSystemPlayerStore, func(), error) {
+	db, err := os.OpenFile(dbFileName, os.O_CREATE|os.O_RDWR, 0666)
+	err = ErrorFileOpening(err, dbFileName)
+	if err != nil {
+		return nil, nil, err
+	}
+	closeFunc := func() {
+		db.Close()
+	}
+	store, err := NewFileSystemPlayerStore(db)
+	err = ErrorFileCreation(err)
+	if err != nil {
+		return nil, nil, err
+	}
+	return store, closeFunc, nil
+}
+
 func initializePlayerDBFile(file *os.File) error {
 	file.Seek(0, 0)
 	info, err := file.Stat()
