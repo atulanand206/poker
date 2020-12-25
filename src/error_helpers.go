@@ -1,4 +1,4 @@
-package main
+package poker
 
 import (
 	"fmt"
@@ -12,9 +12,9 @@ func ErrorParseLeague(err error) error {
 	return err
 }
 
-func ErrorFileOpening(err error) {
+func ErrorFileOpening(err error, fileName string) {
 	if err != nil {
-		log.Fatalf("problem opening %s %v", dbFileName, err)
+		log.Fatalf("problem opening %s %v", fileName, err)
 	}
 }
 

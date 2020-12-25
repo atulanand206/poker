@@ -1,9 +1,8 @@
-package main
+package poker
 
 import (
 	"testing"
 	"net/http/httptest"
-	"lib"
 	"encoding/json"
 	"reflect"
 )
@@ -11,7 +10,7 @@ import (
 func AssertLeague(t *testing.T, response *httptest.ResponseRecorder, wantedLeague []Player) {
 	t.Helper()
 	got := getLeagueFromResponse(t, response)
-	lib.AssertDeepEqual(t, got, wantedLeague)
+	AssertDeepEqual(t, got, wantedLeague)
 }
 
 func getLeagueFromResponse(t *testing.T, response *httptest.ResponseRecorder) (league []Player) {
@@ -25,7 +24,7 @@ func getLeagueFromResponse(t *testing.T, response *httptest.ResponseRecorder) (l
 
 func AssertStatus(t *testing.T, response *httptest.ResponseRecorder, status int) {
 	t.Helper()
-	lib.AssertEqualIntegers(t, response.Code, status)
+	AssertEqualIntegers(t, response.Code, status)
 }
 
 func AssertContentType(t *testing.T, response *httptest.ResponseRecorder) {
