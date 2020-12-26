@@ -22,7 +22,7 @@ func TestGetPlayers(t *testing.T) {
 		{"Angelina", 20},
 		{"Floyd", 10},
 	}
-	server := NewPlayerServer(&store)
+	server, _ := NewPlayerServer(&store)
 	for _, c := range cases {
 		t.Run(testName(c.player), func(t *testing.T) {
 			request := getRequest(c.player)
@@ -51,7 +51,7 @@ func TestPostPlayers(t *testing.T) {
 		{"Angelina", 20},
 		{"Floyd", 10},
 	}
-	server := NewPlayerServer(&store)
+	server, _ := NewPlayerServer(&store)
 	for _, c := range cases {
 		t.Run(testName(c.player), func(t *testing.T) {
 			request := postRequest(c.player)

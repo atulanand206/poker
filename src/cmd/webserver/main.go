@@ -15,7 +15,7 @@ func main() {
 	}
 	defer closeStore()
 
-	server := poker.NewPlayerServer(store)
+	server, _ := poker.NewPlayerServer(store)
 	handler := http.HandlerFunc(server.ServeHTTP)
 	err = http.ListenAndServe(":5000", handler)
 	err = poker.ErrorListenAndServe(err)
